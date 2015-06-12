@@ -1,0 +1,15 @@
+# PUT /posts/1/upvote
+  def upvote
+    @post = Post.find(params[:id])
+    current_user.upvote << @post
+    vote_count += 1
+    redirect_to posts_url, notice: 'Post upvoted!'
+  end
+
+  # DELETE /posts/1/downvote
+  def downvote
+    @post = Post.find(params[:id])
+    current_user.upvote.delete(@post)
+    vote_count -= 1
+    redirect_to posts_url, notice: 'Post downvoted!'
+  end

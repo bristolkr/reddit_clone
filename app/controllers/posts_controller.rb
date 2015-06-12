@@ -25,8 +25,8 @@ before_action :authenticate_user!, :except => [:index, :show]
   end
 
   def update
-    if @post.update(bookmark_params)
-      redirect_to @post, notice: 'Bookmark was successfully updated.'
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated.'
     else
       render :edit
     end

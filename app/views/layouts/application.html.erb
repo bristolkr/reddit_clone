@@ -1,18 +1,58 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kitties & Bunnies">
+  <meta name="author" content="Kelly & Duncan">
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">Kitties & Bunnies</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <% unless current_user %>   
+        <%= link_to "Sign In", new_user_session_path, :class => "btn btn-default navbar-right" %>
+        <% else %>
+        <form action="<%= destroy_user_session_path %>" method="POST" class="navbar-form navbar-right">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+          <input name="_method" type="hidden" value="delete" />
+          <button type="submit" class="btn btn-default">Log Out as <%= current_user.email %></button>
+        </form>
+        <% end %>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
 
+  <div class="container">
+    <div>
+      <%= notice %>
+      <%= alert %>
+    </div>
     <%= yield %>
-  </body>
- </html>
+  </div> <!-- /container -->
+
+  <footer>
+    <div class="container">
+      <p>&copy; The Iron Yard - Kelly Bristol and Duncan Neal Q2 2015</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>

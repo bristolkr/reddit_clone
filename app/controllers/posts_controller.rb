@@ -37,7 +37,14 @@ before_action :authenticate_user!, :except => [:index, :show]
     redirect_to posts_url, notice: 'Post Deleted'
   end
 
-  def vote
+  def upvote
+    @post = Post.find(params[:id])
+    current_user.upvotes.create(:post => @post)
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    current_user.downvotes.create(:post => @post)
   end
 
   private

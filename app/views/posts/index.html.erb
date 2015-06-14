@@ -1,8 +1,9 @@
+<p id="notice"><%= notice %></p>
 <div class="page-header">
   <% if current_user %>
     <%= link_to new_post_path, class: 'btn btn-primary' do %>
       <span class="glyphicon glyphicon-plus"></span>
-      New Bookmark
+      New Post
     <% end %>
 
     <% unless params[:mine] %>

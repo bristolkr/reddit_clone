@@ -1,15 +1,22 @@
 <div class="page-header">
-  <%= link_to posts_path, class: 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
-  <% end %>
+<h1><a href="<%= @post.url %>"><%= @post.title %></a><br> <small>Submitted by <%= @post.user.try(:email) %></small></h1>
+</div>
+
+<div class="btn-group">
+  <%= link_to 'Visit URL', @post.url, class: "btn btn-primary" %>
+</div>
+
+
+  </div>
+
+
   <% if current_user %>
     <%= link_to edit_post_path(@post), class: 'btn btn-primary' do %>
       <span class="glyphicon glyphicon-pencil"></span>
       Edit
     <% end %>
   <% end %>
-  <h1>Show Post</h1>
+
 </div>
 
 <dl class="dl-horizontal">

@@ -1,7 +1,8 @@
-<p id="notice"><%= notice %></p>
-<div class="page-header">
+
+<div class="link row clearfix">
   <%= link_to posts_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
+
     Back
   <% end %>
   <% if current_user %>
@@ -12,7 +13,7 @@
 
     <% unless params[:mine] %>
       <%= link_to posts_path(mine: true), class: 'btn btn-default' do %>
-        Mine
+        My Posts
       <% end %>
     <% else %>
       <%= link_to posts_path, class: 'btn btn-default' do %>

@@ -13,3 +13,16 @@
     vote_count -= 1
     redirect_to posts_url, notice: 'Post downvoted!'
   end
+
+  #to put in index.html.erb (posts) once we fix it
+  <!-- <td>
+            <% if current_user.upvote_posts.include?(post) %>
+              <%= link_to current_user.upvote, method: 'delete' do %>
+                <span class="glyphicon glyphicon-heart"></span>
+              <% end %>
+            <% else %>
+              <%= link_to upvote_post_path(post), method: 'put' do %>
+                <span class="glyphicon glyphicon-heart-empty"></span>
+              <% end %>
+            <% end %>
+          </td> -->

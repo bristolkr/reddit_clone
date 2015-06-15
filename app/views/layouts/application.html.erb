@@ -12,18 +12,11 @@
 <body>
   <header class="navbar navbar-default" role="navigation">
     <div class="navbar-inner">
-      <div class="container">
-
+      <div class="container-fluid">
         <div id="logo" class="navbar-brand">
-<<<<<<< HEAD
-        <a class="navbar-brand">
-            <%= image_tag "rabit.jpg", alt: "rabbit pic", class: "img-rounded", size: "100x122" %>
-=======
-     <a class="navbar-brand">
-            <img src="/rabit.jpg/" alt="rabbit pic" class="img-rounded">
->>>>>>> dd0c2ab93df7c4ca91f31497f7115b6ef3b6eb7d
-        </a>
+  
         <%= link_to "Kitties & Bunnies", root_path %></div>
+
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <% if user_signed_in? -%>
             <ul class="nav navbar-nav navbar-right">
@@ -40,13 +33,16 @@
         </nav>
       </div>
     </div>
-  </header>
+  </header> 
+
+ <div class="pull-left" >
+  <%= image_tag "rabit.jpg", alt: "rabbit pic", class: "img-rounded", size: "200x235" %></div>
 
   <div id="main_content" class="container">
     <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert alert-info") %>
     <% end %>
-
+    
       <div id="content" class="col-md-9 center-block">
         <%= yield %>
       </div>

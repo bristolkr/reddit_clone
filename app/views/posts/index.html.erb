@@ -36,19 +36,20 @@
           <span class="glyphicon glyphicon-chevron-down">
           <%= post.get_downvotes.size %>
         <% end %>
-          <%= link_to new_post_comment_path(post), class: 'btn btn-primary' do %>
+        <%= link_to edit_post_path(post) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+        <%= link_to new_post_comment_path(post), class: 'btn btn-primary' do %>
           Add Comment
-          <% end %>
-          <% else %>
-            <%= link_to post_comment_path(post), class: 'btn btn-primary' do %>
-            Show Comments
-          <% end %>
-          <%= link_to edit_post_path(post) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
+        <% end %>
+        <% else %>
+          <%= link_to post_comment_path(post), class: 'btn btn-primary' do %>
+          Show Comments
+        <% end %>
+          
         <% end %>
       <% end %>
     </div>

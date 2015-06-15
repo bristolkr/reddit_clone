@@ -5,14 +5,15 @@ before_action :authorized_user, only: [:edit, :update, :destroy]
 
   def index
     if params[:mine]
-      @posts = current_user.try(:posts)
+      @posts = current_user.try(:posts).page(params[:page]).order(:cached_weighted_score => :desc)
     else
-      @posts = Post.page(params[:page])
+      @posts = Post.page(params[:page]).per(5).order(:cached_weighted_score => :desc)
     end
   end
 
   def show
     @post = Post.find(params[:id])
+    @comment = @post.comments.build
   end 
 
   def new
@@ -68,6 +69,6 @@ before_action :authorized_user, only: [:edit, :update, :destroy]
     end
 
     def post_params
-      params.require(:post).permit(:url, :title, :description)
+      params.require(:post).permit(:url, :title, :description, :votes)
     end
 end

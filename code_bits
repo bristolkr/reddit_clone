@@ -26,3 +26,7 @@
               <% end %>
             <% end %>
           </td> -->
+
+          #someday I'll figure out why this stuff doesn't work
+          <%= link_to 'Edit', edit_post_comment_path(:id, :post_id) %>
+    <%= link_to 'Delete', post_comment_path(:id, :post_id), method: :delete, data: { confirm: 'Are you sure?' } %>

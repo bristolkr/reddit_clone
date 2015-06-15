@@ -26,6 +26,9 @@
         <%= link_to(post.title, post.url) %><br>
         <small class="author">Submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.email %></small>
       </h2>
+      <%= link_to post_comments_path(post), class: 'btn btn-primary' do %>
+          Show Comments
+      <% end %>
       <% if current_user %>
         <% if post.user == current_user %>
           <%= link_to like_post_path(post), method: :put, class: "btn btn-default btn-sm" do %>
@@ -36,19 +39,16 @@
           <span class="glyphicon glyphicon-chevron-down">
           <%= post.get_downvotes.size %>
         <% end %>
-          <%= link_to new_post_comment_path(post), class: 'btn btn-primary' do %>
+        <%= link_to edit_post_path(post) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+        <%= link_to new_post_comment_path(post), class: 'btn btn-primary' do %>
           Add Comment
-          <% end %>
-          <% else %>
-            <%= link_to post_comment_path(post), class: 'btn btn-primary' do %>
-            Show Comments
-          <% end %>
-          <%= link_to edit_post_path(post) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
+        <% end %>
+                  
         <% end %>
       <% end %>
     </div>

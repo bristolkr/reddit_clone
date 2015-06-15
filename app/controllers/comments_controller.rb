@@ -7,16 +7,16 @@ class CommentsController < ApplicationController
   	@comments = Comment.all
   end
 
-  # def new
-  # 	@post = Post.find(params[:post_id])
-  # 	@comment = current_user.comments.new
-  # end
+  def new
+  	@post = Post.find(params[:post_id])
+  	@comment = current_user.comments.new
+  end
 
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
     @comment.user = current_user
-    redirect_to post_path, notice: 'Comment was successfully created.'
+    redirect_to @post, notice: 'Comment was successfully created.'
 
     # respond_to do |format|
     #   if @comment.save
@@ -31,14 +31,14 @@ class CommentsController < ApplicationController
   end
 
   def edit
-  	@comment.edit(params[:post_id])
+  	@comment.edit(params[:id])
     respond_to do |format|
       format.html { redirect_to @post, notice: 'Comment was successfully edited.' }
     end
   end
 
   def destroy
-    @comment.destroy(params[:post_id])
+    @comment.destroy(params[:id])
     respond_to do |format|
       format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
     end

@@ -2,13 +2,15 @@
 
 <h1>Showing Comments</h1>
 
-  <% @post.comments.each do |comment| %>
-    <%= comment.body %>
-    <%= comment.user %>
-    
-    <%= link_to 'Edit', edit_comment_path(comment) %>
-    <%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
+  <% @comments.each do |comment| %>
+  	<dl class="dl-horizontal">
+	  	<dt>User:</dt>
+	  	<dd><%= comment.user.try(:email) %></dd>
+
+	  	<dt>Comment:</dt>
+	  	<dd><%= comment.body %></dd>
+		</dl>
+  <% end %>
 
 <br>
 

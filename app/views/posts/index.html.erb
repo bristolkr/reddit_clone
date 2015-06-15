@@ -1,8 +1,6 @@
-
 <div class="link row clearfix">
   <%= link_to posts_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
-
     Back
   <% end %>
   <% if current_user %>
@@ -21,55 +19,38 @@
       <% end %>
     <% end %>
   <% end %>
-  <h1>Listing Posts</h1>
-</div>
 
-<div class="table-responsive">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th></th>
-        <% if current_user %>
-          <th></th>
-          <th></th>
-          <th>Fav?</th>
+  <% @posts.each do |post| %>
+    <div class="post row clearfix">
+      <h2>
+        <%= link_to(post.title, post.url) %><br>
+        <small class="author">Submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.email %></small>
+      </h2>
+      <% if current_user %>
+        <% if post.user == current_user %>
+          <%= link_to like_post_path(post), method: :put, class: "btn btn-default btn-sm" do %>
+          <span class="glyphicon glyphicon-chevron-up"></span>
+          <%= post.get_upvotes.size %>
         <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <%= content_tag_for(:tr, @posts) do |post| %>
-        <td><%= post.user.try(:email) %></td>
-        <td><%= link_to truncate(post.title, length: 120), post.url %></td>
-        <td><%= truncate post.description, length: 120, separator: ' ' %></td>
-        <td>
-          <%= link_to post do %>
-            <span class="glyphicon glyphicon-eye-open"></span>
+        <%= link_to dislike_post_path(post), method: :put, class: "btn btn-default btn-sm" do %>
+          <span class="glyphicon glyphicon-chevron-down">
+          <%= post.get_downvotes.size %>
+        <% end %>
+          <%= link_to new_post_comment_path(post), class: 'btn btn-primary' do %>
+          Add Comment
           <% end %>
-        </td>
-        <% if current_user %>
-          <% if post.user == current_user %>
-            <td>
-              <%= link_to edit_post_path(post) do %>
-                <span class="glyphicon glyphicon-pencil"></span>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
-                <span class="glyphicon glyphicon-trash"></span>
-              <% end %>
-            </td>
           <% else %>
-            <td></td>
-            <td></td>
+            <%= link_to post_comment_path(post), class: 'btn btn-primary' do %>
+            Show Comments
           <% end %>
-          
+          <%= link_to edit_post_path(post) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
         <% end %>
       <% end %>
-    </tbody>
-  </table>
-  
-  
+    </div>
+  <% end %>
 </div>

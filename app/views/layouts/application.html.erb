@@ -15,15 +15,13 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <% if user_signed_in? -%>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to 'Submit post', new_post_path %></li>
-              <li><%= link_to 'Account', edit_user_registration_path %></li>
+              <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
             </ul>
           <% else -%>
-            <ul class="nav navbar-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
             <li></li>
-              <li>Want to join?</li>
-              <li><%= link_to 'Sign up', new_user_registration_path %></li>
+              <li><%= link_to 'Want to join?', new_user_registration_path %></li>
               <li><%= link_to 'Sign in', new_user_session_path %></li>
             </ul>
           <% end -%>
